@@ -106,11 +106,7 @@ def test_help_text_translate(n_model, param, text):
         f'Убедитесь, что в модели `{n_model}` значение `help_text` '
         f'для атрибута `{param}` '
         'установлено в соответствии с заданием.'
-    )import importlib
-
-import pytest
-from django.apps import apps
-from django.conf import settings
+    )
 
 
 def test_rus_localization():
