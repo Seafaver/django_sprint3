@@ -1,12 +1,8 @@
+import datetime
+
 from django.shortcuts import get_object_or_404, render
 
-from blog.models import Post
-
-from blog.models import Category
-
-from django.db.models import Q
-
-import datetime
+from blog.models import Category, Post
 
 dt = datetime.datetime.now()
 
