@@ -11,7 +11,7 @@ def index(request):
     template = 'blog/index.html'
     post = Post.objects.select_related('category').filter(
         is_published=True, category__is_published=True
-        ).exclude(pub_date__date__gt=dt.date())[:5]
+    ).exclude(pub_date__date__gt=dt.date())[:5]
     context = {
         'post_list': post,
     }
