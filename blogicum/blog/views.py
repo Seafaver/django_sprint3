@@ -13,9 +13,10 @@ dt = datetime.datetime.now()
 
 def index(request):
     template = 'blog/index.html'
-    post = Post.objects.select_related('category', 'location', 'author').filter(
+    post = Post.objects.select_related('category'
+                                       ).filter(
         is_published=True, category__is_published=True
-        ).exclude(pub_date__date__gt=datetime.datetime.now().date())[:10]
+        ).exclude(pub_date__date__gt=datetime.datetime.now().date())[:5]
     context = {
         'post_list': post,
     }
@@ -29,7 +30,7 @@ def post_detail(request, post_id):
             is_published=True,
             category__is_published=True
         ).exclude(pub_date__date__gt=datetime.datetime.now().date()),
-        pk=post_id
+        id=post_id,
     )
     context = {
         'post_list': post,
@@ -39,9 +40,9 @@ def post_detail(request, post_id):
 
 def category_posts(request, category_slug):
     template = 'blog/category.html'
-    category = get_object_or_404(Category, slug=category_slug)
+    category = get_object_or_404(Category.objects.all(), slug=category_slug)
     post = Post.objects.select_related(
-        'category', 'location', 'author'
+        'category'
         ).filter(
         is_published=True, category__is_published=True,
         category__slug=category_slug

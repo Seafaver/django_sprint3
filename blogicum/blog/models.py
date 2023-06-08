@@ -11,15 +11,17 @@ class Category(models.Model):
     description = models.TextField(verbose_name='Описание')
     slug = models.SlugField(
         verbose_name='Идентификатор',
-        help_text='Идентификатор страницы для URL; разрешены символы латиницы, цифры, дефис и подчёркиваниесв'
+        help_text='Идентификатор страницы для URL; '
+        'разрешены символы латиницы, цифры, дефис и подчёркивание.',
+        unique=True
         )
     is_published = models.BooleanField(
         default=True, verbose_name='Опубликовано',
-        help_text='Снимите галочку, чтобы скрыть публикацию'
+        help_text='Снимите галочку, чтобы скрыть публикацию.'
         )
-    created_at = models.DateTimeField(
-        verbose_name='Добавлено'
-        )
+    created_at = models.DateTimeField(auto_now_add=True,
+                                      verbose_name='Добавлено'
+                                      )
 
     class Meta:
         verbose_name = 'категория'
@@ -33,11 +35,11 @@ class Location(models.Model):
     name = models.CharField(max_length=256, verbose_name='Название места')
     is_published = models.BooleanField(
         default=True, verbose_name='Опубликовано',
-        help_text='Снимите галочку, чтобы скрыть публикацию'
+        help_text='Снимите галочку, чтобы скрыть публикацию.'
         )
-    created_at = models.DateTimeField(
-        verbose_name='Добавлено'
-        )
+    created_at = models.DateTimeField(auto_now_add=True,
+                                      verbose_name='Добавлено'
+                                      )
 
     class Meta:
         verbose_name = 'местоположение'
@@ -73,9 +75,11 @@ class Post(models.Model):
         )
     is_published = models.BooleanField(
         default=True, verbose_name='Опубликовано',
-        help_text='Снимите галочку, чтобы скрыть публикацию'
+        help_text='Снимите галочку, чтобы скрыть публикацию.'
         )
-    created_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True,
+                                      verbose_name='Добавлено'
+                                      )
 
     class Meta:
         verbose_name = 'публикация'
