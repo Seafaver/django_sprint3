@@ -10,19 +10,17 @@ def filtrations(post_object, is_publ1, is_publ2, count):
         #       Условием прохождения тестов "Убедитесь что на
         #       главной странице выводятся 5 постов"
         return (post_object.filter(
-            is_published=is_publ1, category__is_published=is_publ2
-            ).exclude(
+            is_published=is_publ1, category__is_published=is_publ2).exclude(
             pub_date__date__gt=datetime.datetime.now().date())[:count])
     else:
         return (post_object.filter(
-            is_published=is_publ1, category__is_published=is_publ2
-            ).exclude(pub_date__date__gt=datetime.datetime.now().date()))
+            is_published=is_publ1, category__is_published=is_publ2).exclude(
+            pub_date__date__gt=datetime.datetime.now().date()))
 
 
 def index(request):
     return render(request, 'blog/index.html', {
-        'post_list': filtrations(Post.objects.all(), True, True, 5),
-        })
+        'post_list': filtrations(Post.objects.all(), True, True, 5), })
 
 
 def post_detail(request, post_id):

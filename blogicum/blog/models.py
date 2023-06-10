@@ -31,7 +31,7 @@ class Category(Generalmodel):
 
     def __str__(self):
         return f'{(self.title)[:25]} {self.description[:30]}'
-    
+
 
 class Location(Generalmodel):
     name = models.CharField(max_length=256, verbose_name='Название места')
