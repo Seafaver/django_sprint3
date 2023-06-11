@@ -4,7 +4,7 @@ from django.db import models
 User = get_user_model()
 
 
-class Generalmodel(models.Model):
+class Published_Created(models.Model):
     is_published = models.BooleanField(
         default=True, verbose_name='Опубликовано',
         help_text='Снимите галочку, чтобы скрыть публикацию.')
@@ -16,7 +16,7 @@ class Generalmodel(models.Model):
         abstract = True
 
 
-class Category(Generalmodel):
+class Category(Published_Created):
     title = models.CharField(max_length=256, verbose_name='Заголовок')
     description = models.TextField(verbose_name='Описание')
     slug = models.SlugField(
@@ -30,10 +30,10 @@ class Category(Generalmodel):
         verbose_name_plural = 'Категории'
 
     def __str__(self):
-        return f'{(self.title)[:25]} {self.description[:30]}'
+        return f'{self.title[:25]} {self.description[:30]}'
 
 
-class Location(Generalmodel):
+class Location(Published_Created):
     name = models.CharField(max_length=256, verbose_name='Название места')
 
     class Meta:
@@ -44,7 +44,7 @@ class Location(Generalmodel):
         return self.name
 
 
-class Post(models.Model):
+class Post(Published_Created):
     title = models.CharField(max_length=256, verbose_name='Заголовок')
     text = models.TextField(verbose_name='Текст')
     pub_date = models.DateTimeField(
@@ -77,4 +77,4 @@ class Post(models.Model):
         ordering = ('-pub_date',)
 
     def __str__(self):
-        return f'{(self.title)[:25]} {self.text} {self.author}'
+        return f'{self.title[:25]} {self.text[:30]} {self.author}'
