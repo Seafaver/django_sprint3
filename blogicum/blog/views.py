@@ -9,7 +9,7 @@ def output_published(post_object):
     return (
         post_object.filter(
             is_published=True, category__is_published=True
-            )
+        )
         .filter(pub_date__date__lte=datetime.datetime.today()))
 
 
