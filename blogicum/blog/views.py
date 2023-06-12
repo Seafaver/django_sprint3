@@ -5,9 +5,9 @@ from django.shortcuts import get_object_or_404, render
 from blog.models import Category, Post
 
 
-def output_published(post_object):
+def output_published(posts_object):
     return (
-        post_object.filter(
+        posts_object.filter(
             is_published=True, category__is_published=True
         )
         .filter(pub_date__date__lte=datetime.datetime.today()))
